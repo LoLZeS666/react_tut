@@ -1,17 +1,46 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDom from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+const books = [
+    {
+        id:1,
+        img: "https://m.media-amazon.com/images/I/710jnzKlDTL._AC_UY327_FMwebp_QL65_.jpg",
+        title: 'Attitude is everything',
+        author: 'Jeff Keller'
+    },
+    {
+        id:2,
+        img: "https://m.media-amazon.com/images/I/81U3+6n3s1L._AC_UY327_QL65_.jpg",
+        title: 'The Rudest Book Ever',
+        author: 'Shwetabh Gangwar'
+    },
+    {
+        id:3,
+        img: "https://m.media-amazon.com/images/I/91JGwQlnu7L._AC_UY327_QL65_.jpg",
+        title: 'The Book Theif',
+        author: 'Markus Zusak'
+    },
+];
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function BookList() {
+    return (
+        <section className='booklist'>
+            {books.map((book)=>{
+                return (
+                    <Book key={book.id} {...book}></Book>
+                )
+            })}
+        </section>
+    )
+}
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const Book = (props) => {
+    const {img, title, author} = props;
+    return <article className={'book'}>
+        <img src={img} alt=""/>
+        <h1>{title}</h1>
+        <h4>{author}</h4>
+    </article>
+}
+
+ReactDom.render(<BookList/>,document.getElementById('root'));
